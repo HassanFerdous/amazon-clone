@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Product from '../../components/product/Product';
 import path from '../../path';
@@ -6,16 +6,16 @@ import path from '../../path';
 //css
 import './home.scss';
 const Home = ({ cart }) => {
-	const [data, setData] = useState(null);
+	// const [data, setData] = useState(null);
 
-	const fetchData = async () => {
-		const response = await fetch('https://fakestoreapi.com/products');
-		const resData = await response.json();
-		setData(resData);
-	};
+	// const fetchData = async () => {
+	// 	const response = await fetch('https://fakestoreapi.com/products');
+	// 	const resData = await response.json();
+	// 	setData(resData);
+	// };
 
 	useEffect(() => {
-		fetchData();
+		// fetchData();
 	}, []);
 
 	// console.log(cart);
