@@ -13,8 +13,6 @@ import {carts} from '../../redux/cart/cartSelector'
 
 const Header = ({carts}) => {
 
-	console.log(carts.length)
-
 	return (
 		<div className="header">
 			

@@ -32,14 +32,14 @@ const Home = ({ cart }) => {
 					<div className="row">
 						<Product
 							name="Women's t-short"
-							price="$109.95"
+							price={109.95}
 							imgSrc={`${path}/images/product/product2.jpg`}
 							rating={5}
 							id={6}
 						/>
 						<Product
 							name="Men's t-short"
-							price="$109.95"
+							price={109.95}
 							imgSrc={`${path}/images/product/product3.jpg`}
 							rating={4}
 							id={1}
@@ -49,7 +49,7 @@ const Home = ({ cart }) => {
 					<div className="row">
 						<Product
 							name="Fits 15 Laptops"
-							price="$109.95"
+							price={109.95}
 							imgSrc={`${path}/images/product/product2.jpg`}
 							rating={3}
 							id={2}
@@ -57,7 +57,7 @@ const Home = ({ cart }) => {
 
 						<Product
 							name="Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops"
-							price="$109.95"
+							price={109.95}
 							imgSrc={`${path}/images/product/product3.jpg`}
 							rating={4}
 							id={3}
@@ -65,7 +65,7 @@ const Home = ({ cart }) => {
 
 						<Product
 							name="Backpack, Fits 15 Laptops"
-							price="$109.95"
+							price={109.95}
 							imgSrc={`${path}/images/product/product3.jpg`}
 							rating={5}
 							id={4}
@@ -74,7 +74,7 @@ const Home = ({ cart }) => {
 					<div className="row">
 						<Product
 							name="4k gaming monitor"
-							price="$109.95"
+							price={109.95}
 							imgSrc={`${path}/images/product/product1.jpg`}
 							rating={4}
 							id={5}
