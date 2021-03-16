@@ -1,8 +1,8 @@
 .header {
-    background: #000;
     display: flex;
     align-items: center;
     height: 60px;
+    background: #000;
 
     &__logo {
         object-fit: contain;
@@ -46,6 +46,8 @@
     &__nav {
         display: flex;
         align-items: center;
+        padding: 0 20px;
+
 
         &-item {
             display: flex;
@@ -75,11 +77,12 @@
 
         &-count {
             position: absolute;
-            top: 8px;
-            right: 10px;
+            top: 12px;
+            right: 22px;
             color: #cd9042;
-            font-size: 13px;
+            font-size: 10px;
             font-weight: 700;
+            display: inline-block;
         }
     }
 }

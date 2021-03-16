@@ -1,7 +1,11 @@
 import { createSelector } from 'reselect';
 
-const cart = state => state.cart;
+const shopping = state => state.shopping;
 
-export const carts = createSelector([cart], cart => cart.carts);
+export const selectCarts = createSelector([shopping], shopping => shopping.carts);
 
-export const selectCartItem = createSelector([carts], carts => carts.forEach(item => item));
+export const selectTotalPrice = createSelector([selectCarts], carts =>
+	carts.reduce((accumulator, cart) => {
+		return accumulator + cart.price * cart.quantity;
+	}, 0)
+);

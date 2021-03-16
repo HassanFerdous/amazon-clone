@@ -1,5 +1,6 @@
 import React from 'react';
-import { carts, selectCartItem } from '../../redux/cart/cartSelector';
+import { Link } from 'react-router-dom';
+import { selectCarts, selectTotalPrice } from '../../redux/cart/cartSelector';
 import { connect } from 'react-redux';
 
 import { createStructuredSelector } from 'reselect';
@@ -7,32 +8,33 @@ import { createStructuredSelector } from 'reselect';
 //scss
 import './checkout.scss';
 import path from '../../path';
+import { addjustQuantity, removeCartItem } from '../../redux/cart/cartAction';
 
-const Checkout = ({ carts, cartItem }) => {
-	console.log(carts, cartItem);
-	const totalPrice = carts.reduce((accumulator, cartItem) => accumulator + cartItem.price, 0);
-
-	const removeItemFromCart = (carts, id) => {
-		const arr = carts.filter(cart => cart.id !== id);
-
-		console.log(id);
-		console.log(arr);
-	};
-
+const Checkout = ({ carts, totalPrice, removeCartItem, addjustQuantity }) => {
 	return (
 		<div className="checkout">
 			<div className="subtotal">
 				<div className="subtotal__items">
-					<p>
-						Subtoal( items: {carts.length} ): <strong>${totalPrice}</strong>
-					</p>
+					{carts.length ? (
+						<>
+							<p>
+								Subtoal( items: {carts.length} ): <strong>$ {totalPrice.toFixed(2)}</strong>
+							</p>
+						</>
+					) : (
+						<div>
+							<p>Your cart is empty</p>
+							<Link to="/">Go to shopping</Link>
+						</div>
+					)}
+					<div className="subtotal__gift">
+						<input type="checkbox" />
+						<span>This order is contain gift</span>
+					</div>
+					<button className="checkout__btn">Procced to Checkout</button>
 				</div>
-				<div className="subtotal__gift">
-					<input type="checkbox" />
-					<span>This order is contain gift</span>
-				</div>
-				<button className="checkout__btn">Procced to Checkout</button>
 			</div>
+
 			<div className="carts">
 				{carts
 					? carts.map((cart, idx) => (
@@ -40,11 +42,19 @@ const Checkout = ({ carts, cartItem }) => {
 								<div className="cart__img">
 									<img src={`${path}${cart.imgSrc}`} alt="cart-img" />
 								</div>
+
 								<div className="cart__content">
 									<div className="cart__desc">
 										Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam, voluptatem!
 									</div>
-									<div className="cart__price">${cart.price}</div>
+									<div className="cart__price">
+										<strong className="quantity">
+											<button>&#8722;</button>
+											{cart.quantity}
+											<button onClick={() => addjustQuantity(cart)}>+</button>
+										</strong>
+										<strong className="price">${cart.price}</strong>
+									</div>
 									<div className="rating">
 										{Array(cart.rating)
 											.fill()
@@ -56,7 +66,9 @@ const Checkout = ({ carts, cartItem }) => {
 									</div>
 									<button
 										className="cart__remove-btn"
-										onClick={() => removeItemFromCart(carts, cart.id)}>
+										onClick={() => {
+											removeCartItem(cart);
+										}}>
 										Remove from Basket
 									</button>
 								</div>
@@ -69,8 +81,13 @@ const Checkout = ({ carts, cartItem }) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-	carts: carts,
-	cartItem: selectCartItem,
+	carts: selectCarts,
+	totalPrice: selectTotalPrice,
 });
 
-export default connect(mapStateToProps)(Checkout);
+const mapDispatchToProps = dispatch => ({
+	removeCartItem: cart => dispatch(removeCartItem(cart)),
+	addjustQuantity: cart => dispatch(addjustQuantity(cart)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout);

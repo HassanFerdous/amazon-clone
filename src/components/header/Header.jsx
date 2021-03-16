@@ -9,9 +9,11 @@ import { ShoppingBasket } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import {carts} from '../../redux/cart/cartSelector'
+import { selectCarts} from '../../redux/cart/cartSelector'
 
 const Header = ({carts}) => {
+
+	const totalCount = carts.reduce((acc, cart) => acc + cart.quantity, 0);
 
 	return (
 		<div className="header">
@@ -41,7 +43,7 @@ const Header = ({carts}) => {
 				<Link to="/checkout">
 					<div className="header__nav-item header__basket">
 					<ShoppingBasket className="header__basket-icon" />
-					<span className="header__basket-count">{carts?.length}</span>
+					<span className="header__basket-count">{totalCount}</span>
 				</div></Link>
 			</div>
 		</div>
@@ -49,7 +51,7 @@ const Header = ({carts}) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-	carts: carts
+	carts: selectCarts
 })
 
 export default connect(mapStateToProps) (Header);
