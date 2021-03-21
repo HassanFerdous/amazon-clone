@@ -8,9 +8,9 @@ import { createStructuredSelector } from 'reselect';
 //scss
 import './checkout.scss';
 import path from '../../path';
-import { addjustQuantity, removeCartItem } from '../../redux/cart/cartAction';
+import { decreaseQuantity, increaseQuantity, clearItemFromCart } from '../../redux/cart/cartAction';
 
-const Checkout = ({ carts, totalPrice, removeCartItem, addjustQuantity }) => {
+const Checkout = ({ carts, totalPrice, increaseQuantity, decreaseQuantity, clearItemFromCart }) => {
 	return (
 		<div className="checkout">
 			<div className="subtotal">
@@ -49,9 +49,9 @@ const Checkout = ({ carts, totalPrice, removeCartItem, addjustQuantity }) => {
 									</div>
 									<div className="cart__price">
 										<strong className="quantity">
-											<button>&#8722;</button>
+											<button onClick={() => decreaseQuantity(cart)}>&#8722;</button>
 											{cart.quantity}
-											<button onClick={() => addjustQuantity(cart)}>+</button>
+											<button onClick={() => increaseQuantity(cart)}>+</button>
 										</strong>
 										<strong className="price">${cart.price}</strong>
 									</div>
@@ -67,7 +67,7 @@ const Checkout = ({ carts, totalPrice, removeCartItem, addjustQuantity }) => {
 									<button
 										className="cart__remove-btn"
 										onClick={() => {
-											removeCartItem(cart);
+											clearItemFromCart(cart);
 										}}>
 										Remove from Basket
 									</button>
@@ -86,8 +86,9 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = dispatch => ({
-	removeCartItem: cart => dispatch(removeCartItem(cart)),
-	addjustQuantity: cart => dispatch(addjustQuantity(cart)),
+	clearItemFromCart: cart => dispatch(clearItemFromCart(cart)),
+	increaseQuantity: cart => dispatch(increaseQuantity(cart)),
+	decreaseQuantity: cart => dispatch(decreaseQuantity(cart)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout);

@@ -5,18 +5,25 @@ export const addToBasket = carts => {
 	};
 };
 
-export const removeCartItem = cart => {
+export const clearItemFromCart = cart => {
 	return {
-		type: 'REMOVE_CART_ITEM',
+		type: 'CLEAR_CART_ITEM',
 		payload: cart.id,
 	};
 };
 
-export const addjustQuantity = cart => {
+export const increaseQuantity = cart => {
 	return {
-		type: 'ADDJUST_QUANTITY',
+		type: 'INCREASE_QUANTITY',
 		payload: {
 			id: cart.id,
 		},
+	};
+};
+
+export const decreaseQuantity = cart => {
+	return {
+		type: 'DECREASE_QUANTITY',
+		payload: cart,
 	};
 };

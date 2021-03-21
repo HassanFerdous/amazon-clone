@@ -1,4 +1,4 @@
-import { addItemToCart } from './utilities';
+import { addItemToCart, removeItemFromCart } from './utilities';
 
 const INNITIAL_STATE = {
 	carts: [],
@@ -12,18 +12,23 @@ const cartReducer = (state = INNITIAL_STATE, action) => {
 				carts: addItemToCart(state.carts, action.payload),
 			};
 
-		case 'REMOVE_CART_ITEM':
+		case 'CLEAR_CART_ITEM':
 			return {
 				...state,
 				carts: state.carts.filter(cart => cart.id !== action.payload),
 			};
 
-		case 'ADDJUST_QUANTITY':
+		case 'INCREASE_QUANTITY':
 			return {
 				...state,
 				carts: state.carts.map(cart =>
 					cart.id === action.payload.id ? { ...cart, quantity: cart.quantity + 1 } : cart
 				),
+			};
+		case 'DECREASE_QUANTITY':
+			return {
+				...state,
+				carts: removeItemFromCart(state.carts, action.payload),
 			};
 
 		default:

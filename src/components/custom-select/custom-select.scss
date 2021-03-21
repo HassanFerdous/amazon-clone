@@ -1,0 +1,26 @@
+.customSelect {
+    &__default-text {
+        color: #fff;
+        white-space: nowrap;
+    }
+
+    &__option-list {
+        position: absolute;
+        width: 100px;
+        list-style: none;
+        height: auto;
+        background: #ccc;
+        z-index: 1;
+        margin-top: 18px;
+
+        &__item {
+            display: block;
+            padding: 5px 15px;
+
+            &:hover {
+                color: #cd9042;
+                background: #fff;
+            }
+        }
+    }
+}

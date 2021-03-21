@@ -10,10 +10,14 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCarts} from '../../redux/cart/cartSelector'
+import CustomSelect from '../custom-select/CustomSelect';
 
 const Header = ({carts}) => {
 
 	const totalCount = carts.reduce((acc, cart) => acc + cart.quantity, 0);
+
+	const options = Array(5).fill().map((option, index) => `option-${index + 1}`)
+
 
 	return (
 		<div className="header">
@@ -23,6 +27,14 @@ const Header = ({carts}) => {
 			</Link>
 
 			<div className="header__search">
+				<div className="category">
+					{/* <select name="selectCategory" id="selectbox">
+						<div className="custom-select">
+
+						</div>
+					</select> */}
+					<CustomSelect options={options} />
+				</div>
 				<input className="header__search-input" type="text"/>
 				<button className="header__search-btn"><SearchIcon className="header__search-icon" /></button>
 			</div>
